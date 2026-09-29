@@ -1,0 +1,57 @@
+{
+  "name": "routerfield",
+  "description": "Routerfield — open-source alternative to Higgsfield AI, powered by OpenRouter. AI image, video, and cinema studio.",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "packages/studio"
+  ],
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "build:studio": "cd packages/studio && npm run build",
+    "setup": "npm install && npm run build:studio",
+    "vite:dev": "vite",
+    "vite:build": "vite build",
+    "electron:build": "vite build && electron-builder --mac",
+    "electron:build:win": "vite build && electron-builder --win",
+    "electron:build:all": "vite build && electron-builder --mac --win"
+  },
+  "build": {
+    "appId": "app.routerfield.desktop",
+    "productName": "Routerfield",
+    "copyright": "Copyright © 2025",
+    "directories": { "output": "release" },
+    "afterPack": "./afterPack.js",
+    "files": ["dist/**/*", "electron/**/*"],
+    "mac": {
+      "category": "public.app-category.graphics-design",
+      "icon": "public/banner.png",
+      "gatekeeperAssess": false,
+      "target": [{ "target": "dmg", "arch": ["x64", "arm64"] }]
+    },
+    "win": {
+      "icon": "public/banner.png",
+      "target": [{ "target": "nsis", "arch": ["x64", "arm64"] }]
+    }
+  },
+  "dependencies": {
+    "next": "^15.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "studio": "*"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "autoprefixer": "^10.4.24",
+    "electron": "^33.4.11",
+    "electron-builder": "^25.1.8",
+    "eslint": "^9",
+    "eslint-config-next": "^15.0.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.0",
+    "vite": "^5.4.0"
+  }
+}
